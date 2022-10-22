@@ -5,50 +5,55 @@
 The client, Alphabet Soup, is a philanthropic organization that provides funding to non-profits that are geared towards environmentalism.  The client is requesting a binary classifier capable of predicting whether applicants will be successful if they are funded by Alphabet Soup.
 
 ## Results
-
-* Data Preprocessing
-	* Target variable for model: 
+### Data Preprocessing
+* Target variable for model: 
 
 As the client is asking for data modeling on charities receiving donations that are considered successful, the target variable chosen was 'IS_SUCCESSFUL', which is a boolean value indicating if the money was used effectively or not.
 
-	* What variable(s) are considered to be the features for your model?
+* What variable(s) are considered to be the features for your model?
 
 Though there are a high number of application types ('APPLICATION_TYPE'), for 43,000+ lines of data, that's a relatively low number of categories to use as a feature for the model.  Likewise, the classification field ('CLASSIFICATION') shows that the vast majority of rows fall into one of 5 classifications and the rest are of much lesser consequence and can be bundled together for simplification that won't confuse the model.  I believe both the amount of funds requested by the non-profit ('ASK_AMT') and if special consideration ('SPECIAL_CONSIDERATIONS') was taken to approve the application are worth being listed as important features for the model.
 
-	* Variables that are neither targets nor features, and should be removed from the input data:
+* Variables that are neither targets nor features, and should be removed from the input data:
 
 'EIN' and 'NAME' are identification columns and as such don't provide any data that would influence the training model.  There are no duplicate EIN and therefore Names listed in the dataset, so there is no trend to trace.  In the third optimization attempt, the other string columns 'AFFILIATION','USE_CASE', and 'ORGANIZATION' were also removed, but as the loss and accuracy scores were one of the lowest of the various evaluations, it appears that one or more of these should be tested further as a valuable feature for the model.
 
-* Compiling, Training, and Evaluating the Model
-	* How many neurons, layers, and activation functions did you select for your neural network model, and why?
+### Compiling, Training, and Evaluating the Model
+* How many neurons, layers, and activation functions did you select for your neural network model, and why?
 
 The first model was provided as a template with two hidden layers (with 80 and 30 neurons respectively), using the relu activation.  Subsequent optimization models reflected a deviation, but not in all ways in the same optimization in order to attempt to pinpoint how the model could be best optimized to bring the accuracy level up to at least 75%.  The details of the three optimized models will be covered in more detail further below.
 
-	* Were you able to achieve the target model performance?
+* Were you able to achieve the target model performance?
 
 Unfortunately, all attempts were unsuccessful.  The results were as follows:
 
-First Model:
+<ins>First Model:</ins>
+
+![image](https://user-images.githubusercontent.com/107294123/197322122-fe28d272-f60f-4916-92ee-7fee5455a8c8.png)
+
+<ins>First Optimization Attempt:</ins>
+
+![image](https://user-images.githubusercontent.com/107294123/197322051-d2f8c2d2-e403-438d-b0b4-edcee157edd7.png)
+
+<ins>Second  Optimization Attempt:</ins>
+
+![image](https://user-images.githubusercontent.com/107294123/197322064-7de179b5-c735-4193-a278-896c75c599a6.png)
 
 
-First Optimization Attempt:
+<ins>Third  Optimization Attempt:</ins>
+
+![image](https://user-images.githubusercontent.com/107294123/197322073-45435162-4be1-4ed9-bc35-14c640aa9258.png)
 
 
-Second  Optimization Attempt:
+* What steps did you take to try and increase model performance?
+
+	* First Optimization Attempt: This model added an additional hidden layer with a higher number of neurons.  The activation type remained the same, no data columns were removed, and since the first model showed no significant improvement through the 100 epochs, I lowered the training model down to 60 to provide enough training without too much redundancy.
 
 
-Third  Optimization Attempt:
+	* Second  Optimization Attempt: This model used different activation functions. As relu returns a value from 0 to infinity, the dataset may be too simple for this to be useful.  I used sigmoid for the three hidden layers in case in case the data wasn't as linear as expected and possibly create a better understanding and accuracy.
 
 
-	* What steps did you take to try and increase model performance?
-
-		* First Optimization Attempt: This model added an additional hidden layer with a higher number of neurons.  The activation type remained the same, no data columns were removed, and since the first model showed no significant improvement through the 100 epochs, I lowered the training model down to 60 to provide enough training without too much redundancy.
-
-
-		* Second  Optimization Attempt: This model used different activation functions. As relu returns a value from 0 to infinity, the dataset may be too simple for this to be useful.  I used sigmoid for the three hidden layers in case in case the data wasn't as linear as expected and possibly create a better understanding and accuracy.
-
-
-		* Third  Optimization Attempt: In this instance I dropped three additional columns and left the rest of the model untouched from the first in order to determine if they were truly beneficial or not.
+	* Third  Optimization Attempt: In this instance I dropped three additional columns and left the rest of the model untouched from the first in order to determine if they were truly beneficial or not.
 
 ## Summary
 
